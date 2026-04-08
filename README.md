@@ -6,12 +6,13 @@ A full-stack agricultural e-commerce website for Sir Lindon Farms, featuring a m
 
 ### Public Website
 - **Beautiful Homepage**: Hero section, product categories, achievements showcase, and customer testimonials
-- **Product Shop**: Browse and filter farm products by category
+- **Product Shop**: Browse and filter farm products by category and price range
 - **Achievements Page**: Historic timeline of farm milestones and certifications
 - **Gallery**: Visual tour of the farm and facilities
 - **About Page**: Farm mission, values, and company information
 - **Contact**: Get in touch with the farm
 - **Responsive Design**: Fully mobile-responsive design using Tailwind CSS
+ - **Animated Experience**: Grid-motion hero background, blur-text headings, and smooth SVG-based icons
 
 ### Admin Dashboard
 - **Product Management**: Add, edit, and delete farm products with image uploads
@@ -19,6 +20,8 @@ A full-stack agricultural e-commerce website for Sir Lindon Farms, featuring a m
 - **Contracts**: Manage and assign farm contracts to specific users
 - **Order Management**: Track and manage customer orders
 - **User Management**: Manage customer and admin accounts
+ - **Achievements Stats Management**: Create and manage homepage achievement metrics (stats + labels)
+ - **Achievements Slider Management**: Upload, list, and delete images used in the homepage achievements slideshow
 - **Dashboard Overview**: Quick statistics and actions
 
 ## Color Scheme
@@ -119,8 +122,10 @@ sir-lindon-farms/
    - `STRIPE_SECRET_KEY` - Stripe secret key
 
 4. **Set up the database:**
+   Run the latest Prisma migration (for example, the `add_product_stock` migration):
+
    ```bash
-   npx prisma migrate dev
+   npx prisma migrate dev --name add_product_stock
    ```
 
 5. **Seed the database (optional):**
@@ -130,7 +135,8 @@ sir-lindon-farms/
 
 ### Development
 
-Start the development server:
+After running the Prisma migration above, start the development server:
+
 ```bash
 npm run dev
 ```
@@ -217,7 +223,7 @@ Additional API routes can be created in the `app/api/` directory:
 
 ## Support
 
-For support, email contact@sirlindonfarms.com or call +1 (234) 567-8900
+For support, email contact@sirlindonfarms.com or call +256 754158774
 
 ## License
 

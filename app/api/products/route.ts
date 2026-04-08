@@ -3,9 +3,14 @@ import { prisma } from '@/lib/prisma';
 
 export const runtime = 'nodejs';
 
-export async function GET() {
+export async function GET(req: NextRequest) {
     try {
+        const { searchParams } = new URL(req.url);
+        const featuredParam = searchParams.get('featured');
+        const featuredOnly = featuredParam === 'true' || featuredParam === '1';
+
         const baseProducts = await prisma.product.findMany({
+            where: featuredOnly ? { featured: true } : undefined,
             orderBy: { createdAt: 'desc' },
         });
 
@@ -38,7 +43,7 @@ export async function GET() {
 export async function POST(req: NextRequest) {
     try {
         const body = await req.json();
-        const { name, description, price, imageUrl, category, stock } = body;
+        const { name, description, price, imageUrl, category, stock, featured } = body;
 
         if (!name || !category || typeof price !== 'number' || Number.isNaN(price)) {
             return NextResponse.json({ error: 'Invalid product data' }, { status: 400 });
@@ -51,6 +56,7 @@ export async function POST(req: NextRequest) {
                 price,
                 imageUrl,
                 category,
+                featured: featured === true,
             },
         });
 
@@ -88,7 +94,7 @@ export async function POST(req: NextRequest) {
 export async function PUT(req: NextRequest) {
     try {
         const body = await req.json();
-        const { id, name, description, price, imageUrl, category, stock } = body;
+        const { id, name, description, price, imageUrl, category, stock, featured } = body;
 
         if (!id) {
             return NextResponse.json({ error: 'Product id is required' }, { status: 400 });
@@ -102,6 +108,7 @@ export async function PUT(req: NextRequest) {
                 ...(price !== undefined && { price }),
                 ...(imageUrl !== undefined && { imageUrl }),
                 ...(category !== undefined && { category }),
+                ...(featured !== undefined && { featured: !!featured }),
             },
         });
 

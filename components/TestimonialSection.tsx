@@ -50,7 +50,25 @@ export default function TestimonialSection() {
                             className="bg-white rounded-lg shadow-md p-8 hover:shadow-xl transform transition-all duration-300 hover:-translate-y-2 animate-fade-up"
                             style={{ animationDelay: `${index * 0.1}s` }}
                         >
-                            <div className="mb-4 text-3xl">⭐⭐⭐⭐⭐</div>
+                            <div
+                                className="mb-4 flex gap-1 text-2xl"
+                                aria-label="5 star rating"
+                                style={{ color: '#01E370' }}
+                            >
+                                {[...Array(5)].map((_, i) => (
+                                    <svg
+                                        key={i}
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="20"
+                                        height="20"
+                                        fill="currentColor"
+                                        viewBox="0 0 16 16"
+                                        className="bi bi-star-fill"
+                                    >
+                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                    </svg>
+                                ))}
+                            </div>
                             <p className="text-gray-700 mb-6 italic">"{testimonial.quote}"</p>
                             <div>
                                 <p className="font-bold text-primary">{testimonial.author}</p>

@@ -7,6 +7,7 @@ export type ShopProduct = {
     name: string;
     price: number;
     category: string;
+    description?: string | null;
     imageUrl?: string | null;
     stock?: number | null;
 };
@@ -94,6 +95,11 @@ export default function ShopProductGrid({ products }: Props) {
                     <div className="p-4">
                         <p className="text-sm text-primary/70 mb-1">{product.category}</p>
                         <h3 className="font-bold text-primary mb-2">{product.name}</h3>
+                        <p className="text-sm text-gray-600 mb-3">
+                            {product.description && product.description.trim().length > 0
+                                ? product.description
+                                : 'Fresh and high-quality farm product'}
+                        </p>
                         <div className="flex justify-between items-center">
                             <span className="text-2xl font-bold text-primary">${product.price.toFixed(2)}</span>
                             <button

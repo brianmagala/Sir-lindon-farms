@@ -29,19 +29,19 @@ export default function GalleryPage() {
             <section className="bg-primary py-12">
                 <div className="container mx-auto px-4 text-center">
                     <h1 className="text-4xl font-bold text-accent mb-4">Gallery</h1>
-                    <p className="text-accent/80">Visual tour of Sir Lindon Farms</p>
+                    <p className="text-accent/80">Visual tour of Sir. Lindon Farms</p>
                 </div>
             </section>
 
             <section className="bg-[#060010] flex flex-col items-center w-full">
                 {hasUploads ? (
-                    <div className="w-full relative h-[800px] overflow-hidden">
+                    <div className="w-full relative h-[800px] overflow-y-auto">
                         <DomeGallery
                             images={imagePaths}
                             fit={1.2}
                             minRadius={600}
                             maxVerticalRotationDeg={0}
-                            segments={34}
+                            segments={30}
                             dragDampening={3.6}
                             grayscale={false}
                         />

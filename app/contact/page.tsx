@@ -34,7 +34,7 @@ export default function ContactPage() {
                         <div className="text-center">
                             <div className="text-3xl mb-2">📞</div>
                             <h3 className="font-bold text-primary">Phone</h3>
-                            <p className="text-gray-600 text-sm">+1 (234) 567-8900</p>
+                            <p className="text-gray-600 text-sm">+256 7541 58774</p>
                         </div>
                         <div className="text-center">
                             <div className="text-3xl mb-2">📧</div>

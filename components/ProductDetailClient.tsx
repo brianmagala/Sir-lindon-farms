@@ -108,6 +108,9 @@ export default function ProductDetailClient({ product }: Props) {
                 </div>
                 <h1 className="text-2xl md:text-3xl font-bold text-primary mb-3">{product.name}</h1>
                 <p className="text-sm text-gray-600 mb-4">Category: {product.category}</p>
+                {product.description && (
+                    <p className="text-sm text-gray-700 mb-4">{product.description}</p>
+                )}
 
                 <div className="bg-[#013E37] text-accent rounded-md px-4 py-3 flex items-center justify-between mb-4">
                     <div>

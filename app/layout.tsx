@@ -5,7 +5,7 @@ import Footer from '@/components/Footer';
 import AdminShortcutListener from '@/components/AdminShortcutListener';
 
 export const metadata: Metadata = {
-    title: 'Sir Lindon Farms - Premium Farm Products',
+    title: 'Sir. Lindon Farms - Premium Farm Products',
     description: 'Discover fresh farm products, contracts, and farm achievements from Sir Lindon Farms',
     keywords: ['farm', 'products', 'agriculture', 'fresh produce'],
 };

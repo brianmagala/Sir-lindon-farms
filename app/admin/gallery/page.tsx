@@ -41,7 +41,7 @@ export default function AdminGalleryPage() {
     const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
         const selected = event.target.files?.[0] ?? null;
         setFile(selected);
-    };
+        };
 
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();

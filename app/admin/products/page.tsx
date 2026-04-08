@@ -9,7 +9,9 @@ type Product = {
     price: number;
     category: string;
     imageUrl: string;
+    description?: string;
     stock?: number;
+    featured?: boolean;
 };
 
 export default function AdminProductsPage() {
@@ -24,6 +26,7 @@ export default function AdminProductsPage() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [editingProductId, setEditingProductId] = useState<string | null>(null);
+    const [featured, setFeatured] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
@@ -39,7 +42,9 @@ export default function AdminProductsPage() {
                     price: p.price as number,
                     category: p.category as string,
                     imageUrl: p.imageUrl as string,
+                    description: p.description as string | undefined,
                     stock: typeof p.stock === 'number' ? p.stock : undefined,
+                    featured: !!p.featured,
                 }));
                 setProducts(loaded);
             } finally {
@@ -91,6 +96,7 @@ export default function AdminProductsPage() {
                         imageUrl: imagePath,
                         category,
                         stock: stock === '' ? undefined : Number(stock) || 0,
+                        featured,
                     }),
                 });
 
@@ -120,7 +126,9 @@ export default function AdminProductsPage() {
                         price: created.price,
                         category: created.category,
                         imageUrl: created.imageUrl,
+                        description: created.description,
                         stock: created.stock,
+                        featured: created.featured,
                     },
                     ...prev,
                 ]);
@@ -136,6 +144,7 @@ export default function AdminProductsPage() {
                         imageUrl: imagePath || undefined,
                         category,
                         stock: stock === '' ? undefined : Number(stock) || 0,
+                        featured,
                     }),
                 });
 
@@ -167,7 +176,9 @@ export default function AdminProductsPage() {
                                 price: updated.price,
                                 category: updated.category,
                                 imageUrl: updated.imageUrl,
+                                description: updated.description,
                                 stock: updated.stock,
+                                featured: updated.featured,
                             }
                             : product,
                     ),
@@ -182,6 +193,7 @@ export default function AdminProductsPage() {
             setCategory('Fruits');
             setDescription('');
             setImageFile(null);
+            setFeatured(false);
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Something went wrong');
         } finally {
@@ -196,8 +208,9 @@ export default function AdminProductsPage() {
         setPrice(product.price.toString());
         setStock(product.stock != null ? product.stock.toString() : '');
         setCategory(product.category);
-        setDescription('');
+        setDescription(product.description ?? '');
         setImageFile(null);
+        setFeatured(!!product.featured);
     };
 
     const handleDelete = async (id: string) => {
@@ -295,6 +308,18 @@ export default function AdminProductsPage() {
                                     className="w-full"
                                 />
                             </div>
+                            <div className="flex items-center gap-2 mt-6 md:mt-8">
+                                <input
+                                    id="featured"
+                                    type="checkbox"
+                                    checked={featured}
+                                    onChange={(e) => setFeatured(e.target.checked)}
+                                    className="w-4 h-4"
+                                />
+                                <label htmlFor="featured" className="text-primary font-semibold">
+                                    Mark as Featured (show on homepage)
+                                </label>
+                            </div>
                         </div>
                         <div>
                             <label className="block text-primary font-semibold mb-2">Description</label>
@@ -326,6 +351,7 @@ export default function AdminProductsPage() {
                             <th className="px-6 py-3 text-left font-semibold">Category</th>
                             <th className="px-6 py-3 text-left font-semibold">Price</th>
                             <th className="px-6 py-3 text-left font-semibold">Stock</th>
+                            <th className="px-6 py-3 text-left font-semibold">Featured</th>
                             <th className="px-6 py-3 text-left font-semibold">Actions</th>
                         </tr>
                     </thead>
@@ -348,6 +374,15 @@ export default function AdminProductsPage() {
                                 <td className="px-6 py-4">{product.category}</td>
                                 <td className="px-6 py-4 font-semibold">${product.price}</td>
                                 <td className="px-6 py-4">{product.stock ?? '-'}</td>
+                                <td className="px-6 py-4">
+                                    {product.featured ? (
+                                        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-primary text-accent">
+                                            Featured
+                                        </span>
+                                    ) : (
+                                        <span className="text-xs text-gray-400">-</span>
+                                    )}
+                                </td>
                                 <td className="px-6 py-4">
                                     <button
                                         className="text-primary hover:underline mr-4"

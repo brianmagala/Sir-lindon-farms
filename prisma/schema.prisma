@@ -77,6 +77,7 @@ model Product {
   stock       Int      @default(20)
   imageUrl    String
   category    String // "Fruits", "Vegetables", "Livestock", "Spices", etc.
+  featured    Boolean  @default(false)
   inStock     Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -166,4 +167,15 @@ model Achievement {
   updatedAt   DateTime @updatedAt
 
   @@map("achievements")
+}
+
+model FarmStat {
+  id        String   @id @default(cuid())
+  label     String
+  value     Int
+  suffix    String   @default("")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("farm_stats")
 }

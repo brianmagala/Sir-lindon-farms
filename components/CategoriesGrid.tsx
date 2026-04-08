@@ -74,51 +74,57 @@ export default function CategoriesGrid() {
                     {categories.map((category) => (
                         <Link key={category.id} href={`/shop?category=${category.id}`}>
                             <div
-                                className="group relative h-64 rounded-lg overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
+                                className="group cursor-pointer"
                                 onMouseEnter={() => setHoveredId(category.id)}
                                 onMouseLeave={() => setHoveredId(null)}
                             >
-                                {/* Background */}
-                                <div
-                                    className={`absolute inset-0 ${hoveredId === category.id ? 'scale-110' : 'scale-100'
-                                        } transition-transform duration-300 overflow-hidden`}
-                                >
-                                    {category.image ? (
-                                        <>
-                                            <Image
-                                                src={category.image}
-                                                alt={category.name}
-                                                fill
-                                                className="object-cover"
-                                            />
-                                            <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-black/10 to-black/0" />
-                                        </>
-                                    ) : (
-                                        <div
-                                            className="absolute inset-0"
-                                            style={{
-                                                background: `linear-gradient(135deg, ${['#013E37', '#1A5A52', '#0A2B28'][Math.floor(Math.random() * 3)]} 0%, ${['#FFEFB3', '#FFE680', '#FFF8D6'][Math.floor(Math.random() * 3)]} 100%)`,
-                                            }}
-                                        ></div>
-                                    )}
-                                </div>
-
-                                {/* Icon & Text */}
-                                <div className="absolute inset-0 flex flex-col items-center justify-center text-center z-10">
-                                    {!category.image && (
-                                        <div className="text-6xl mb-3 animate-float group-hover:animate-none">{category.icon}</div>
-                                    )}
-                                    <h3 className="text-xl font-bold text-primary">{category.name}</h3>
-                                </div>
-
-                                {/* Hover Overlay */}
-                                {hoveredId === category.id && (
-                                    <div className="absolute inset-0 bg-primary/80 flex flex-col items-center justify-center text-center p-4 animate-fade-in">
-                                        <h3 className="text-2xl font-bold text-accent mb-2">{category.name}</h3>
-                                        <p className="text-accent/90 mb-4">{category.description}</p>
-                                        <span className="text-accent font-bold">Discover More →</span>
+                                <div className="relative h-64 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform group-hover:-translate-y-1">
+                                    {/* Background */}
+                                    <div
+                                        className={`absolute inset-0 ${hoveredId === category.id ? 'scale-110' : 'scale-100'
+                                            } transition-transform duration-300 overflow-hidden`}
+                                    >
+                                        {category.image ? (
+                                            <>
+                                                <Image
+                                                    src={category.image}
+                                                    alt={category.name}
+                                                    fill
+                                                    className="object-cover"
+                                                />
+                                                <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-black/10 to-black/0" />
+                                            </>
+                                        ) : (
+                                            <div
+                                                className="absolute inset-0"
+                                                style={{
+                                                    background: `linear-gradient(135deg, ${['#013E37', '#1A5A52', '#0A2B28'][Math.floor(Math.random() * 3)]} 0%, ${['#FFEFB3', '#FFE680', '#FFF8D6'][Math.floor(Math.random() * 3)]} 100%)`,
+                                                }}
+                                            ></div>
+                                        )}
                                     </div>
-                                )}
+
+                                    {/* Icon only for non-image categories */}
+                                    {!category.image && (
+                                        <div className="absolute inset-0 flex flex-col items-center justify-center text-center z-10">
+                                            <div className="text-6xl mb-3 animate-float group-hover:animate-none">{category.icon}</div>
+                                        </div>
+                                    )}
+
+                                    {/* Hover Overlay */}
+                                    {hoveredId === category.id && (
+                                        <div className="absolute inset-0 bg-primary/80 flex flex-col items-center justify-center text-center p-4 animate-fade-in">
+                                            <h3 className="text-2xl font-bold text-accent mb-2">{category.name}</h3>
+                                            <p className="text-accent/90 mb-4">{category.description}</p>
+                                            <span className="text-accent font-bold">Discover More →</span>
+                                        </div>
+                                    )}
+                                </div>
+
+                                {/* Title below card */}
+                                <div className="mt-3 text-center">
+                                    <h3 className="text-lg font-semibold text-primary">{category.name}</h3>
+                                </div>
                             </div>
                         </Link>
                     ))}
