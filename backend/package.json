@@ -1,0 +1,19 @@
+{
+    "name": "sir-lindon-farms-backend",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "prisma:migrate": "prisma migrate dev",
+        "prisma:generate": "prisma generate",
+        "prisma:studio": "prisma studio"
+    },
+    "dependencies": {
+        "@prisma/client": "^4.16.0",
+        "dotenv": "^16.0.0",
+        "stripe": "^13.0.0"
+    },
+    "devDependencies": {
+        "prisma": "^4.16.0",
+        "typescript": "^5.0.0"
+    }
+}
